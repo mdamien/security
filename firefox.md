@@ -193,6 +193,3 @@ Related Links:
  * [All "about:config" Options](https://hg.mozilla.org/mozilla-central/raw-file/3461f3cae78495f100a0f7d3d2e0b89292d3ec02/modules/libpref/init/all.js)
  * [Arch Firefox Tweaks](https://wiki.archlinux.org/index.php/Firefox_tweaks)
  * [Firefox Bullshit Removal](https://gist.github.com/haasn/69e19fc2fe0e25f3cff5)
-
-Final Notes:
-* I'll try to keep this list up to date when there is changes or any new additions. *
