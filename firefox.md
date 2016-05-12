@@ -1,4 +1,4 @@
-Firefox v46+ Hardening
+Firefox v46+ Security Hardening + Some Tweaks
 
 * Useful Plugins
  * uBlock Origin by [Raymond Hill](https://github.com/gorhill) ( [GitHub](https://github.com/gorhill/uBlock/) | [Addon](https://addons.mozilla.org/en-US/firefox/addon/ublock-origin/) )
