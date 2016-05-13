@@ -190,8 +190,8 @@ user_pref("browser.download.loglevel", ""); //(default: Error)*
 user_pref("browser.download.animateNotifications", false); //(default: true)*
 
 // "View Source Code In External Editor"
-user_pref("view_source.editor.external", true); //(default: false)*
-user_pref("view_source.editor.path", "your editor path"); //(default: empty)*
+// user_pref("view_source.editor.external", true); //(default: false)*
+// user_pref("view_source.editor.path", "your editor path"); //(default: empty)*
 ```
 
 Related Links:
