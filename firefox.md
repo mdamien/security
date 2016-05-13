@@ -6,188 +6,193 @@ Firefox v46+ Security Hardening + Some Tweaks
  * RequestPolicy by [Justin Samuel](https://justinsamuel.com/) ( [Site](https://www.requestpolicy.com) | [Addon](https://addons.mozilla.org/en-US/firefox/addon/requestpolicy/) )
  * Random Agent Spoofer by [dillbyrne](https://dillbyrne.github.io/) ( [GitHub](https://github.com/dillbyrne/random-agent-spoofer) | [Addon](https://addons.mozilla.org/en-US/firefox/addon/random-agent-spoofer/) )
 
-* Disable "Weak SSL" ( [Test SSL](https://www.howsmyssl.com/) )
- * ``security.ssl3.dhe_rsa_aes_128_sha = false`` *(default: true)*
- * ``security.ssl3.dhe_rsa_aes_256_sha = false`` *(default: true)*
- * ``security.ssl3.rsa_rc4_128_md5 = false`` *(default: true)*
- * ``security.ssl3.rsa_rc4_128_sha = false`` *(default: true)*
- * ``security.ssl3.rsa_des_ede3_sha = false`` *(default: true)*
- * ``security.ssl3.ecdhe_rsa_rc4_128_sha = false`` *(default: true)*
- * ``security.ssl3.ecdhe_ecdsa_rc4_128_sha = false`` *(default: true)*
+Copy paste these settings in `user.js` (`~/.mozilla/firefox/<profile>.default/user.js` on linux) to override the defaults.
 
-* Perfect Forward Secrecy *(some sites may not work)*
- * ``security.ssl3.rsa_aes_256_sha = false`` *(default: true)*
+```javascript
+// Disable "Weak SSL" ( [Test SSL](https://www.howsmyssl.com/) )
+user_pref("security.ssl3.dhe_rsa_aes_128_sha", false); //(default: true)*
+user_pref("security.ssl3.dhe_rsa_aes_256_sha", false); //(default: true)*
+user_pref("security.ssl3.rsa_rc4_128_md5", false); //(default: true)*
+user_pref("security.ssl3.rsa_rc4_128_sha", false); //(default: true)*
+user_pref("security.ssl3.rsa_des_ede3_sha", false); //(default: true)*
+user_pref("security.ssl3.ecdhe_rsa_rc4_128_sha", false); //(default: true)*
+user_pref("security.ssl3.ecdhe_ecdsa_rc4_128_sha", false); //(default: true)*
 
-* "Force TLS 1.2"
- * ``security.tls.version.min = 3`` *(default: 1)*
+// Perfect Forward Secrecy //(some sites may not work)*
+user_pref("security.ssl3.rsa_aes_256_sha", false); //(default: true)*
 
-* Crypto Hardening
- * ``security.OCSP.require = true`` *(default: false)*
- * ``security.ssl.require_safe_negotiation = true`` *(default: false)*
- * ``security.ssl.treat_unsafe_negotiation_as_broken = true`` *(default: false)*
+// "Force TLS 1.2"
+user_pref("security.tls.version.min", 3); //(default: 1)*
 
-* Disable "Hello"
- * ``loop.enabled = false`` *(default: true)*
+// Crypto Hardening
+user_pref("security.OCSP.require", true); //(default: false)*
+user_pref("security.ssl.require_safe_negotiation", true); //(default: false)*
+user_pref("security.ssl.treat_unsafe_negotiation_as_broken", true); //(default: false)*
 
-* Disable "Pocket"
- * ``extensions.pocket.enabled = false`` *(default: true)*
+// Disable "Hello"
+user_pref("loop.enabled", false); //(default: true)*
 
-* Disable "Reader"
- * ``reader.parse-on-load.enabled = false`` *(default: true)*
+// Disable "Pocket"
+user_pref("extensions.pocket.enabled", false); //(default: true)*
 
-* Disable "Sync Services"
- * ``services.sync.enabled = false`` *(default: true)*
- * ``services.sync.sendVersionInfo = false`` *(default: true)*
- * ``services.sync*`` (all other false)
+// Disable "Reader"
+user_pref("reader.parse-on-load.enabled", false); //(default: true)*
 
-* Disable "Sponsored Content"
- * ``browser.newtabpage.directory.source = ""`` *(default: https://tiles.services.mozilla.com/v3/links/fetch/%LOCALE%/%CHANNEL%)*
- * ``browser.newtabpage.directory.ping = ""`` *(default: https://tiles.services.mozilla.com/v3/links/)*
+// Disable "Sync Services"
+user_pref("services.sync.enabled", false); //(default: true)*
+user_pref("services.sync.sendVersionInfo", false); //(default: true)*
+user_pref("services.sync.migrated", false); // (all other false)
+// TODO: disable sync of ublock filters ?
 
-* Disable "WebSockets"
- * ``network.websocket.enabled = false`` *(default: none)* *create new boolean*
+// Disable "Sponsored Content"
+user_pref("browser.newtabpage.directory.source", ""); //(default: https://tiles.services.mozilla.com/v3/links/fetch/%LOCALE%/%CHANNEL%)*
+user_pref("browser.newtabpage.directory.ping", ""); //(default: https://tiles.services.mozilla.com/v3/links/)*
 
-* Referer Control
- * ``network.http.sendRefererHeader = 0`` *(default: 2)*
-  * 0 = disable completely
-  * 1 = send referer on link click
-  * 2 = always send
- * ``network.http.referer.XOriginPolicy = 1`` *(default: 0)*
-  * 0 = always send
-  * 1 = only on domain match
- * ``network.http.referer.spoofSource = true`` *(default: false)* *(send target uri)*
- * ``network.http.referer.trimmingPolicy = 2`` *(default: 0)*
-  * 0 = full
-  * 1 = scheme
-  * 2 = host port and path
+// Disable "WebSockets"
+user_pref("network.websocket.enabled", false); //(default: none)// *create new boolean*
 
-* Enable "Do Not Track"
- * ``privacy.donottrackheader.enabled = true`` *(default: false)*
+// Referer Control
+user_pref("network.http.sendRefererHeader", 0); //(default: 2)*
+  // 0 = disable completely
+  // 1 = send referer on link click
+  // 2 = always send
+user_pref("network.http.referer.XOriginPolicy", 1); //(default: 0)*
+  // 0 = always send
+  // 1 = only on domain match
+user_pref("network.http.referer.spoofSource", true); //(default: false)// //(send target uri)*
+user_pref("network.http.referer.trimmingPolicy", 2); //(default: 0)*
+  // 0 = full
+  // 1 = scheme
+  // 2 = host port and path
 
-* Disable "Geolocation"
- * ``geo.enabled = false`` *(default: true)*
- * ``browser.search.geoSpecificDefaults = false`` *(default: true)*
- * ``geo.wifi.uri = ""`` *(default: https://www.googleapis.com/geolocation/v1/geolocate?key=%GOOGLE_API_KEY%)*
- * ``browser.geolocation.warning.infoURL = ""`` *(default: https://www.mozilla.org/%LOCALE%/firefox/geolocation/)*
- * ``browser.search.geoSpecificDefaults.url = ""`` *(default: https://search.services.mozilla.com/1/%APP%/%VERSION%/%CHANNEL%/%LOCALE%/%REGION%/%DISTRIBUTION%/%DISTRIBUTION_VERSION%)*
- * ``browser.search.geoip.url = ""`` *(default: https://location.services.mozilla.com/v1/country?key=%MOZILLA_API_KEY%)*
+// Enable "Do Not Track"
+user_pref("privacy.donottrackheader.enabled", true); //(default: false)*
 
-* Disable "Beacons"
- * ``beacon.enabled = false`` *(defualt: true)*
+// Disable "Geolocation"
+user_pref("geo.enabled", false); //(default: true)*
+user_pref("browser.search.geoSpecificDefaults", false); //(default: true)*
+user_pref("geo.wifi.uri", ""); //(default: https://www.googleapis.com/geolocation/v1/geolocate?key=%GOOGLE_API_KEY%)*
+user_pref("browser.geolocation.warning.infoURL", ""); //(default: https://www.mozilla.org/%LOCALE%/firefox/geolocation/)*
+user_pref("browser.search.geoSpecificDefaults.url", ""); //(default: https://search.services.mozilla.com/1/%APP%/%VERSION%/%CHANNEL%/%LOCALE%/%REGION%/%DISTRIBUTION%/%DISTRIBUTION_VERSION%)*
+user_pref("browser.search.geoip.url", ""); //(default: https://location.services.mozilla.com/v1/country?key=%MOZILLA_API_KEY%)*
 
-* Disable "Browser Pings"
- * ``browser.send_pings = false`` *(default)*
+// Disable "Beacons"
+user_pref("beacon.enabled", false); //(defualt: true)*
 
-* Disable "Health Reports"
- * ``datareporting.healthreport.uploadEnabled = false`` *(default: true)*
- * ``datareporting.policy.dataSubmissionEnabled = false`` *(default: true)*
+// Disable "Browser Pings"
+user_pref("browser.send_pings", false); //(default)*
 
-* Disable "Telemetry Reports*
- * ``toolkit.telemetry.enabled = false`` *(default)*
- * ``toolkit.telemetry.unified = false`` *(default: true)*
- * ``toolkit.telemetry.archive.enabled = false`` *(default: true)*
- * ``toolkit.telemetry.optoutSample = false`` *(default: true)*
- * ``toolkit.telemetry.server = ""`` *(default: https://incoming.telemetry.mozilla.org)*
- * ``experiments.manifest.uri = ""`` *(default: https://telemetry-experiment.cdn.mozilla.net/manifest/v1/firefox/%VERSION%/%CHANNEL%)*
+// Disable "Health Reports"
+user_pref("datareporting.healthreport.uploadEnabled", false); //(default: true)*
+user_pref("datareporting.policy.dataSubmissionEnabled", false); //(default: true)*
 
-* Disable "Browser Session Restore"
- * ``browser.sessionstore.restore_on_demand = false`` *(default: true)*
- * ``browser.sessionstore.resume_from_crash = false`` *(default: true)*
+// Disable "Telemetry Reports*
+user_pref("toolkit.telemetry.enabled", false); //(default)*
+user_pref("toolkit.telemetry.unified", false); //(default: true)*
+user_pref("toolkit.telemetry.archive.enabled", false); //(default: true)*
+user_pref("toolkit.telemetry.optoutSample", false); //(default: true)*
+user_pref("toolkit.telemetry.server", ""); //(default: https://incoming.telemetry.mozilla.org)*
+user_pref("experiments.manifest.uri", ""); //(default: https://telemetry-experiment.cdn.mozilla.net/manifest/v1/firefox/%VERSION%/%CHANNEL%)*
 
-* Disable "PDF Viewer"
- * ``pdfjs.disabled = true`` *(default: false)*
+// Disable "Browser Session Restore"
+user_pref("browser.sessionstore.restore_on_demand", false); //(default: true)*
+user_pref("browser.sessionstore.resume_from_crash", false); //(default: true)*
 
-* Disable "DRM Video"
- * ``media.eme.enabled = false`` *(default: true)*
+// Disable "PDF Viewer"
+user_pref("pdfjs.disabled", true); //(default: false)*
 
-* Disable "WebGL"
- * ``webgl.disabled = true`` *(default: false)*
+// Disable "DRM Video"
+user_pref("media.eme.enabled", false); //(default: true)*
 
-* Disable "JavaScript"
- * ``javascript.enabled = true`` *(default: false)*
+// Disable "WebGL"
+user_pref("webgl.disabled", true); //(default: false)*
 
-* Disable "Battery Manager"
- * ``dom.battery.enabled = false`` *(default: true)*
+// Disable "JavaScript"
+user_pref("javascript.enabled", true); //(default: false)*
 
-* Disable "Link Pre-Fetching"
- * ``network.http.speculative-parallel-limit = 0`` *(default: 6)*
+// Disable "Battery Manager"
+user_pref("dom.battery.enabled", false); //(default: true)*
 
-* Disable "WebRTC"
- * ``media.peerconnection.enabled = false`` *(default: true)*
- * ``media.peerconnection.simulcast = false`` *(default: true)*
- * ``media.peerconnection.turn.disable = true`` *(default: false)*
- * ``media.peerconnection.identity.enabled = false`` *(default: true)*
- * ``media.peerconnection.use_document_iceservers = false`` *(default: true)*
- * ``media.peerconnection.video.enabled = false`` *(default: true)*
+// Disable "Link Pre-Fetching"
+user_pref("network.http.speculative-parallel-limit", 0); //(default: 6)*
 
-* Disable "Safe Browsing"
- * ``browser.safebrowsing.enabled = false`` *(default: true)*
- * ``browser.safebrowsing.downloads.enabled = false`` *(default: true)*
- * ``browser.safebrowsing.malware.enabled = false`` *(default: true)*
+// Disable "WebRTC"
+user_pref("media.peerconnection.enabled", false); //(default: true)*
+user_pref("media.peerconnection.simulcast", false); //(default: true)*
+user_pref("media.peerconnection.turn.disable", true); //(default: false)*
+user_pref("media.peerconnection.identity.enabled", false); //(default: true)*
+user_pref("media.peerconnection.use_document_iceservers", false); //(default: true)*
+user_pref("media.peerconnection.video.enabled", false); //(default: true)*
 
-* Disable "Social Media Integration"
- * ``social.remote-install.enabled = false`` *(default: true)*
- * ``social.toast-notifications.enabled = false`` *(default: true)*
- * ``social.directories = ""`` *(default: https://activations.cdn.mozilla.net)*
- * ``social.whitelist = ""`` *(default: https://mozsocial.cliqz.com)*
+// Disable "Safe Browsing"
+user_pref("browser.safebrowsing.enabled", false); //(default: true)*
+user_pref("browser.safebrowsing.downloads.enabled", false); //(default: true)*
+user_pref("browser.safebrowsing.malware.enabled", false); //(default: true)*
 
-* Enable "SOCKS Remote DNS"
- * ``network.proxy.socks_remote_dns = true`` *(default: false)*
+// Disable "Social Media Integration"
+user_pref("social.remote-install.enabled", false); //(default: true)*
+user_pref("social.toast-notifications.enabled", false); //(default: true)*
+user_pref("social.directories", ""); //(default: https://activations.cdn.mozilla.net)*
+user_pref("social.whitelist", ""); //(default: https://mozsocial.cliqz.com)*
 
-* Disable "IPv6"
- * ``network.dns.disableIPv6 = true`` *(default: false)*
+// Enable "SOCKS Remote DNS"
+user_pref("network.proxy.socks_remote_dns", true); //(default: false)*
 
-* Disable "Camera Face Detection"
- * ``camera.control.face_detection.enabled = false`` *(default: true)*
+// Disable "IPv6"
+user_pref("network.dns.disableIPv6", true); //(default: false)*
 
-* Disable "Device Statistics"
- * ``device.sensors.enabled = false`` *(default: true)*
+// Disable "Camera Face Detection"
+user_pref("camera.control.face_detection.enabled", false); //(default: true)*
 
-* Enable "Tracking" Protection
- * ``privacy.trackingprotection.enabled = true`` *(default: false)*
+// Disable "Device Statistics"
+user_pref("device.sensors.enabled", false); //(default: true)*
 
-* Disable "Browser Disk Cache"
- * ``browser.cache.disk.enable = false`` *(default: true)*
+// Enable "Tracking" Protection
+user_pref("privacy.trackingprotection.enabled", true); //(default: false)*
 
-* Disable "Remote WiFi Scan"
- * ``devtools.remote.wifi.scan = false`` *(default: true)*
+// Disable "Browser Disk Cache"
+user_pref("browser.cache.disk.enable", false); //(default: true)*
 
-* Disable "Domain Guessing"
- * ``browser.fixup.alternate.enabled = false`` *(default: true)*
+// Disable "Remote WiFi Scan"
+user_pref("devtools.remote.wifi.scan", false); //(default: true)*
 
-* Disable "Search Suggestion"
- * ``browser.search.suggest.enabled = false`` *(default: true)*
+// Disable "Domain Guessing"
+user_pref("browser.fixup.alternate.enabled", false); //(default: true)*
 
-* Disable "Address Bar Search"
- * ``keyword.enabled = false`` *(default: true)*
+// Disable "Search Suggestion"
+user_pref("browser.search.suggest.enabled", false); //(default: true)*
 
-* Enable "http://" Prefix
- * ``browser.urlbar.trimURLs = false`` *(default: true)*
+// Disable "Address Bar Search"
+user_pref("keyword.enabled", false); //(default: true)*
 
-* Disable "Clipboard DOM Events"
- * ``dom.event.clipboardevents.enabled = false`` *(default: true)*
+// Enable "http://" Prefix
+user_pref("browser.urlbar.trimURLs", false); //(default: true)*
 
-* Prevent "Context Menu Disable"
- * ``dom.event.contextmenu.enabled = false`` *(default: true)*
+// Disable "Clipboard DOM Events"
+user_pref("dom.event.clipboardevents.enabled", false); //(default: true)*
 
-* Prevent "Browser AutoRefresh"
- * ``accessibility.blockautorefresh = true`` *(default: false)*
+// Prevent "Context Menu Disable"
+user_pref("dom.event.contextmenu.enabled", false); //(default: true)*
 
-* Enable "Advanced Color Profile Support"
- * ``gfx.color_management.enablev4 = true`` *(default: false)*
+// Prevent "Browser AutoRefresh"
+user_pref("accessibility.blockautorefresh", true); //(default: false)*
+
+// Enable "Advanced Color Profile Support"
+user_pref("gfx.color_management.enablev4", true); //(default: false)*
  
-* Disable "Download History"
- * ``browser.download.manager.addToRecentDocs = false`` *(default: true)*
+// Disable "Download History"
+user_pref("browser.download.manager.addToRecentDocs", false); //(default: true)*
 
-* Disable "Download Logs"
- * ``browser.download.loglevel = ""`` *(default: Error)*
+// Disable "Download Logs"
+user_pref("browser.download.loglevel", ""); //(default: Error)*
 
-* Disable "Download Notifications"
- * ``browser.download.animateNotifications = false`` *(default: true)*
+// Disable "Download Notifications"
+user_pref("browser.download.animateNotifications", false); //(default: true)*
 
-* "View Source Code In External Editor"
- * ``view_source.editor.external = true`` *(default: false)*
- * ``view_source.editor.path = "your editor path"`` *(default: empty)*
+// "View Source Code In External Editor"
+user_pref("view_source.editor.external", true); //(default: false)*
+user_pref("view_source.editor.path", "your editor path"); //(default: empty)*
+```
 
 Related Links:
  * [All "about:config" Options](https://hg.mozilla.org/mozilla-central/raw-file/3461f3cae78495f100a0f7d3d2e0b89292d3ec02/modules/libpref/init/all.js)
