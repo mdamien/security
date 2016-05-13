@@ -5,6 +5,7 @@ Firefox v46+ Security Hardening + Some Tweaks
  * NoScript Security Suite by [Giorgio Maone](https://maone.net/) ( [Site](https://noscript.net/) | [Addon](https://addons.mozilla.org/en-US/firefox/addon/noscript/) )
  * RequestPolicy by [Justin Samuel](https://justinsamuel.com/) ( [Site](https://www.requestpolicy.com) | [Addon](https://addons.mozilla.org/en-US/firefox/addon/requestpolicy/) )
  * Random Agent Spoofer by [dillbyrne](https://dillbyrne.github.io/) ( [GitHub](https://github.com/dillbyrne/random-agent-spoofer) | [Addon](https://addons.mozilla.org/en-US/firefox/addon/random-agent-spoofer/) )
+ * HTTPS Everywhere by the [EFF](https://www.eff.org) ([Site](https://www.eff.org/Https-Everywhere))
 
 * Disable "Weak SSL" ( [Test SSL](https://www.howsmyssl.com/) )
  * ``security.ssl3.dhe_rsa_aes_128_sha = false`` *(default: true)*
